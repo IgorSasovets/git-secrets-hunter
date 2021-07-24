@@ -1,0 +1,4 @@
+# cache files
+__pycache__/*
+lib/__pycache__/*
+gitleaks-binary/*
