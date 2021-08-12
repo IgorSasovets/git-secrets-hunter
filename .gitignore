@@ -2,3 +2,4 @@
 __pycache__/*
 lib/__pycache__/*
 gitleaks-binary/*
+truffleHog_*_patterns.txt

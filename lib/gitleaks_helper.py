@@ -9,17 +9,17 @@ from constant import GITLEAKS_DOWNLOAD_URL,GITLEAKS_BINARY_PATH,GITLEAKS_SCAN_DE
 
 def scan_single_user_repos_using_gitleaks(username):
     print_delimiter()
-    print("* Scanning public repositories of %s..." % username)
+    print("* Scanning public repositories of %s using gitleaks..." % username)
     clone_urls_list = get_user_public_repos(username)
     for repo_url in clone_urls_list:
         print("* Started scanning of single repository: %s" % repo_url)
-        res = subprocess.call([GITLEAKS_BINARY_PATH, "-r", repo_url, "--depth=%i" % GITLEAKS_SCAN_DEPTH, "-v"])
+        subprocess.call([GITLEAKS_BINARY_PATH, "-r", repo_url, "--depth=%i" % GITLEAKS_SCAN_DEPTH, "-v"])
         print("* Gitleaks scan for %s finished. See above results\n" % repo_url)
     print_delimiter()
 
 def scan_multiple_users_repos_using_gitleaks(usernames_list):
     print_delimiter()
-    print("* Started scanning of multiple users repositories...")
+    print("* Started scanning of multiple users repositories using gitleaks...")
     for username in usernames_list:
         scan_single_user_repos_using_gitleaks(username)
     print("* Finished scanning of multiple users repositories")
