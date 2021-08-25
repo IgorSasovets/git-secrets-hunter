@@ -1,6 +1,12 @@
 # git-secrets-hunter
 Tool that helps to detect sensitive information in public GitHub repositories
-Under the hood it uses [zricethezav/gitleaks](https://github.com/zricethezav/gitleaks) for scanning
+
+## Features
+* Scan a user repository using [zricethezav/gitleaks](https://github.com/zricethezav/gitleaks) tool
+* Scan a user repository using [truffleHog](https://github.com/trufflesecurity/truffleHog) tool
+* Automatically install [zricethezav/gitleaks](https://github.com/zricethezav/gitleaks) binary depending on you OS
+* Read list of usernames for scanning from a file
+* Get public repositories of the user
 
 ## Usage
 
@@ -45,6 +51,11 @@ optional arguments:
                         amd64', 'windows-386.exe', 'windows-amd64.exe']
 
 ```
+
+## TODO:
+- [ ] Integrate [semgrep](https://github.com/returntocorp/semgrep) tool
+- [ ] Extend number of available options
+- [ ] Add possibility to save program output into a file
 
 ## Examples
 
