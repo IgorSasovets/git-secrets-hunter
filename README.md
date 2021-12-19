@@ -36,26 +36,30 @@ Tool that helps to detect sensitive information in public GitHub repositories
  ##:::: ##:. #######:: ##::. ##:::: ##:::: ########: ##:::. ##:
 ..:::::..:::.......:::..::::..:::::..:::::........::..:::::..::
     
-usage: git-secrets-hunter.py [-h] [-f FILE] [-u USERNAME] [-m MODE] [-p PLATFORM]
+usage: git-secrets-hunter.py [-h] [-f FILE] [-u USERNAME] [-m MODE] [-p PLATFORM] [-o OUTPUT_FILENAME]
 
 Git secrets hunter options:
 
 optional arguments:
   -h, --help            show this help message and exit
-  -f FILE, --file FILE  path of a file that contains list of GitHub usernames
+  -f FILE, --file FILE  path to a file that contains list of GitHub usernames
   -u USERNAME, --username USERNAME
                         GitHub username of a target
-  -m MODE, --mode MODE  run mode. Available modes: ['scan_single_user', 'scan_list_of_users']
+  -s SCANNER, --scanner SCANNER
+                        scanner to use. Available options: ['all', 'gitleaks', 'truffleHog']
   -p PLATFORM, --platform PLATFORM
-                        OS platform (for gitleaks), available platforms: ['linux-amd64', 'linux-arm', 'linux-mips', 'darwin-
-                        amd64', 'windows-386.exe', 'windows-amd64.exe']
-
+                        OS platform (for gitleaks), available platforms: ['linux-amd64', 'linux-
+                        arm', 'linux-mips', 'darwin-amd64', 'windows-386.exe', 'windows-
+                        amd64.exe']
+  -o OUTPUT_FILENAME, --output-filename OUTPUT_FILENAME
+                        name of file where to save run results(.log, .txt). If file exists, it
+                        will be deleted.
 ```
 
 ## TODO:
 - [ ] Integrate [semgrep](https://github.com/returntocorp/semgrep) tool
 - [ ] Extend number of available options
-- [ ] Add possibility to save program output into a file
+- [x] Add possibility to save program output into a file
 
 ## Examples
 

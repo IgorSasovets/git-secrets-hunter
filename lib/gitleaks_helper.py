@@ -5,23 +5,30 @@ from pathlib import Path
 
 from lib.logo import print_delimiter
 from lib.github_helper import get_user_public_repos
+from lib.output_handler import write_output_to_a_file
 from constant import GITLEAKS_DOWNLOAD_URL,GITLEAKS_BINARY_PATH,GITLEAKS_SCAN_DEPTH
 
-def scan_single_user_repos_using_gitleaks(username):
+def scan_single_user_repos_using_gitleaks(username, output_file):
     print_delimiter()
     print("* Scanning public repositories of %s using gitleaks..." % username)
     clone_urls_list = get_user_public_repos(username)
     for repo_url in clone_urls_list:
+        args_list = [GITLEAKS_BINARY_PATH, "-r", repo_url, "--depth=%i" % GITLEAKS_SCAN_DEPTH, "-v"]
         print("* Started scanning of single repository: %s" % repo_url)
-        subprocess.call([GITLEAKS_BINARY_PATH, "-r", repo_url, "--depth=%i" % GITLEAKS_SCAN_DEPTH, "-v"])
+        if output_file != None and output_file != "":
+            output = subprocess.run(args_list, capture_output=True, text=True)
+            write_output_to_a_file(output_file, output.stdout)
+            write_output_to_a_file(output_file, output.stderr)
+        else:
+            subprocess.call(args_list)
         print("* Gitleaks scan for %s finished. See above results\n" % repo_url)
     print_delimiter()
 
-def scan_multiple_users_repos_using_gitleaks(usernames_list):
+def scan_multiple_users_repos_using_gitleaks(usernames_list, output_file):
     print_delimiter()
     print("* Started scanning of multiple users repositories using gitleaks...")
     for username in usernames_list:
-        scan_single_user_repos_using_gitleaks(username)
+        scan_single_user_repos_using_gitleaks(username, output_file)
     print("* Finished scanning of multiple users repositories")
     print_delimiter()
 
